@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My form</title>
+<script>
+var globalMessage="Please fill out the form.";
+function popupMessage(message) {
+alert(message);
+}
+function validateForm(){
+var name = document.forms["myForm"]["fname"].value;
+var age = document.forms["myForm"]["age"].value;
+var email = document.forms["myForm"]["email"].value;
+var village = document.forms["myForm"]["village"].value;
+if (name == "" || age == "" || email == "" || village == "") {
+popupMessage("All fields must be filled out");
+return false;
+}
+if (isNaN(age)){
+popupMessage("Age must be a number");
+return false;
+}
+var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+if (!emailPattern.test(email)) {
+popupMessage("Invalid email address");
+return false;
+}
+popupMessage("Form submitted successfully!");
+return true;
+}
+function showWelcomeMessage() {
+var localMessage = "Hello! "+ globalMessage; 
+popupMessage(localMessage);
+}
+window.onload = function() {
+showWelcomeMessage();
+}
+</script>
+</head>
+<body>
+<h1> Form Validation</h1>
+<form name="myForm" action="/action_page.php" method="post" onsubmit="return validateForm()">
+<h3>Name : <input type="text" name="fname" required></h3>
+<h3>Age :  <input type="text" name="age" required></h3>
+<h3>Email id : <input type="text" name="email" required></h3>
+<h3><u>Address:</u></h3>
+<h3>Village : <input type="text" name="village" required></h3>
+<br>
+<input type="submit" value="Submit">
+</form>
+<p> <h3>fields are required you must fill this data.</h3></p>
+</body>
+</html>
