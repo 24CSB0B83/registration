@@ -1,53 +1,119 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My form</title>
-<script>
-var globalMessage="Please fill out the form.";
-function popupMessage(message) {
-alert(message);
-}
-function validateForm(){
-var name = document.forms["myForm"]["fname"].value;
-var age = document.forms["myForm"]["age"].value;
-var email = document.forms["myForm"]["email"].value;
-var village = document.forms["myForm"]["village"].value;
-if (name == "" || age == "" || email == "" || village == "") {
-popupMessage("All fields must be filled out");
-return false;
-}
-if (isNaN(age)){
-popupMessage("Age must be a number");
-return false;
-}
-var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
-if (!emailPattern.test(email)) {
-popupMessage("Invalid email address");
-return false;
-}
-popupMessage("Form submitted successfully!");
-return true;
-}
-function showWelcomeMessage() {
-var localMessage = "Hello! "+ globalMessage; 
-popupMessage(localMessage);
-}
-window.onload = function() {
-showWelcomeMessage();
-}
-</script>
+    <title>My Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="text"], input[type="email"], input[type="number"], input[type="date"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        marquee {
+            font-size: 18px;
+            color: #d9534f;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        var globalMessage = "Please fill out the form.";
+        function popupMessage(message) {
+            alert(message);
+        }
+        function validateForm() {
+            var name = document.forms["myForm"]["fname"].value;
+            var age = document.forms["myForm"]["age"].value;
+            var dob = document.forms["myForm"]["dob"].value;
+            var email = document.forms["myForm"]["email"].value;
+            var village = document.forms["myForm"]["village"].value;
+            var gender = document.forms["myForm"]["gender"].value;
+            
+            if (name == "" || age == "" || dob == "" || email == "" || village == "" || gender == "") {
+                popupMessage("All fields must be filled out");
+                return false;
+            }
+            if (isNaN(age)) {
+                popupMessage("Age must be a number");
+                return false;
+            }
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                popupMessage("Invalid email address");
+                return false;
+            }
+            popupMessage("Form submitted successfully!");
+            return true;
+        }
+        function showWelcomeMessage() {
+            var localMessage = "Hello! " + globalMessage;
+            popupMessage(localMessage);
+        }
+        window.onload = function() {
+            showWelcomeMessage();
+        };
+    </script>
 </head>
 <body>
-<h1> Form Validation</h1>
-<form name="myForm" action="/action_page.php" method="post" onsubmit="return validateForm()">
-<h3>Name : <input type="text" name="fname" required></h3>
-<h3>Age :  <input type="text" name="age" required></h3>
-<h3>Email id : <input type="text" name="email" required></h3>
-<h3><u>Address:</u></h3>
-<h3>Village : <input type="text" name="village" required></h3>
-<br>
-<input type="submit" value="Submit">
-</form>
-<p> <h3>fields are required you must fill this data.</h3></p>
+    <marquee>Registrations are open</marquee>
+    <div class="container">
+        <h1>Form Validation</h1>
+        <form name="myForm" action="/action_page.php" method="post" onsubmit="return validateForm()">
+            <label>Name:</label>
+            <input type="text" name="fname" required>
+            <label>Age:</label>
+            <input type="text" name="age" required>
+            <label>Date of Birth:</label>
+            <input type="date" name="dob" required>
+            <label>Gender:</label>
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <label>Email:</label>
+            <input type="text" name="email" required>
+            <label>Village:</label>
+            <input type="text" name="village" required>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <p><strong>All fields are required.</strong></p>
+    </div>
 </body>
 </html>
